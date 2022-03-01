@@ -39,7 +39,7 @@ const Login = () => {
           }
         },
         onError: (error: any) => {
-          console.log(error.message);
+          setErrorMessage(error?.response?.data?.message);
         },
       }
     );

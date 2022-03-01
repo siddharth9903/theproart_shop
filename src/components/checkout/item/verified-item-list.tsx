@@ -24,9 +24,8 @@ import axios from 'axios';
 interface Props {
   className?: string;
 }
-const VerifiedItemList: React.FC<Props> = ({ className }) => {
+const VerifiedItemList: React.FC<Props> = ({ className}) => {
   const { t } = useTranslation('common');
-const [orderId, setOrderId] = useState('')
   const { items, isEmpty: isEmptyCart } = useCart();
   const [verifiedResponse] = useAtom(verifiedResponseAtom);
   const [coupon, setCoupon] = useAtom(couponAtom);

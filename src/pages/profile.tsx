@@ -11,7 +11,6 @@ export { getStaticProps } from '@framework/ssr/common';
 const ProfilePage = () => {
   const { t } = useTranslation('common');
   const { me } = useUser();
-  console.log('me',me);
   return (
     <div className="w-full overflow-hidden px-1 pb-1">
       <div className="mb-8">

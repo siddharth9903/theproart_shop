@@ -10,6 +10,9 @@ export const useUpdateCustomerMutation = () => {
     (input: CustomerType) => CustomerService.updateCustomer(input),
     {
       // Always refetch after error or success:
+      onSuccess: () => {
+        queryClient.invalidateQueries('me');
+      },
       onSettled: () => {
         queryClient.invalidateQueries('me');
       },
@@ -18,10 +21,15 @@ export const useUpdateCustomerMutation = () => {
 };
 
 export const useContactMutation = () => {
+  const queryClient = useQueryClient();
   const { t } = useTranslation('common');
 
   return useMutation((input: ContactType) => CustomerService.contact(input), {
+    onSettled: () => {
+      queryClient.invalidateQueries('me');
+    },
     onSuccess: (data) => {
+      queryClient.invalidateQueries('me');
       if (data.success) {
         toast.success(t(data.message));
       } else {

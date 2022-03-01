@@ -16,16 +16,25 @@ interface PaymentMethodInformation {
 }
 
 // Payment Methods Mapping Object
+const razorPayStart = ({ makePayment }: any) => {
+  return <>{makePayment()}</>;
+};
 
 const AVAILABLE_PAYMENT_METHODS_MAP: Record<
   PaymentMethodName,
   PaymentMethodInformation
 > = {
-  STRIPE: {
-    name: 'Stripe',
-    value: 'STRIPE',
+  // STRIPE: {
+  //   name: 'Stripe',
+  //   value: 'STRIPE',
+  //   icon: '/payment/stripe.png',
+  //   component: StripePayment,
+  // },
+  RAZORPAY: {
+    name: 'Razorpay',
+    value: 'RAZORPAY',
     icon: '/payment/stripe.png',
-    component: StripePayment,
+    component: razorPayStart,
   },
   CASH_ON_DELIVERY: {
     name: 'Cash On Delivery',
@@ -35,12 +44,14 @@ const AVAILABLE_PAYMENT_METHODS_MAP: Record<
   },
 };
 
-const PaymentGrid: React.FC<{ className?: string }> = ({ className }) => {
+const PaymentGrid: React.FC<{ className?: string}> = ({
+  className,
+}) => {
   const [gateway, setGateway] = useAtom<PaymentMethodName>(paymentGatewayAtom);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const { t } = useTranslation('common');
   const PaymentMethod = AVAILABLE_PAYMENT_METHODS_MAP[gateway];
-  const Component = PaymentMethod?.component ?? StripePayment;
+  const Component = PaymentMethod?.component ?? CashOnDelivery;
   return (
     <div className={className}>
       {errorMessage ? (
@@ -74,7 +85,8 @@ const PaymentGrid: React.FC<{ className?: string }> = ({ className }) => {
                     {icon ? (
                       <>
                         {/* eslint-disable */}
-                        <img src={icon} alt={name} className="h-[30px]" />
+                        {/* <img src={icon} alt={name} className="h-[30px]" /> */}
+                        <img src="{icon}" alt={name} className="h-[30px]" />
                       </>
                     ) : (
                       <span className="text-xs text-heading font-semibold">
@@ -89,7 +101,8 @@ const PaymentGrid: React.FC<{ className?: string }> = ({ className }) => {
         </div>
       </RadioGroup>
       <div>
-        <Component />
+        {/* <Component makePayment/> */}
+        {/* {PaymentMethod?.component ? PaymentMethod?.component : CashOnDelivery} */}
       </div>
     </div>
   );

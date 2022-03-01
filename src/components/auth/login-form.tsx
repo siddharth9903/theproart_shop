@@ -10,6 +10,7 @@ import { GoogleIcon } from '@components/icons/google';
 import { useModalAction } from '@components/ui/modal/modal.context';
 import { MobileIcon } from '@components/icons/mobile-icon';
 import { Form } from '@components/ui/forms/form';
+import { useEffect, useState } from 'react';
 
 interface LoginFormProps {
   errorMessage: string;
@@ -35,7 +36,8 @@ const LoginForm: React.FC<LoginFormProps> = ({
 }) => {
   const { t } = useTranslation('common');
   const { openModal } = useModalAction();
-
+  const [errorMsg, setErrorMsg] = useState('');
+  
   return (
     <div className="py-6 px-5 sm:p-8 bg-light w-screen md:max-w-[480px] min-h-screen md:min-h-0 h-full md:h-auto flex flex-col justify-center md:rounded-xl">
       <div className="flex justify-center">
@@ -50,7 +52,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
           message={t(errorMessage)}
           className="mb-6"
           closeable={true}
-          // onClose={() => setErrorMsg('')}
+          onClose={() => setErrorMsg('')}
         />
       )}
       <Form<FormValues> onSubmit={onSubmit} validationSchema={loginFormSchema}>
@@ -118,6 +120,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
       <div className="flex flex-col items-center justify-center relative text-sm text-heading mt-8 sm:mt-11 mb-6 sm:mb-8">
         <hr className="w-full" />
       </div>
+      {<div></div>}
       <div className="text-sm sm:text-base text-body text-center">
         {t('text-no-account')}{' '}
         <button

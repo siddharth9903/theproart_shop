@@ -10,7 +10,7 @@ export const siteSettings = {
     height: 40,
   },
   defaultLanguage: 'en',
-  currencyCode: 'USD',
+  currencyCode: 'INR',
   product: {
     placeholderImage: '/product-placeholder.svg',
     cardMaps: {

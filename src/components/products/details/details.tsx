@@ -199,7 +199,8 @@ const Details: React.FC<Props> = ({
                     data={product}
                     variant="big"
                     variation={selectedVariation}
-                    disabled={selectedVariation?.is_disable || !isSelected}
+                    disabled={Number(quantity) > 0 ? false : true}
+                    // disabled={selectedVariation?.is_disable || !isSelected}
                   />
                 </div>
 

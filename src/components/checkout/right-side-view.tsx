@@ -14,7 +14,7 @@ export const RightSideView = () => {
   if (isEmpty(verifiedResponse)) {
     return <UnverifiedItemList />;
   }
-  return <VerifiedItemList />;
+  return <VerifiedItemList/>;
 };
 
 export default RightSideView;

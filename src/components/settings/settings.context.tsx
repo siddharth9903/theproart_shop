@@ -44,25 +44,13 @@ const initialState = {
   },
   deliveryTime: [
     {
-      title: 'Express Delivery',
-      description: '90 min express delivery',
+      title: 'Home',
+      description: '8.00 AM - 9.00 PM',
     },
-    {
-      title: 'Morning',
-      description: '8.00 AM - 11.00 AM',
-    },
-    {
-      title: 'Noon',
-      description: '11.00 AM - 2.00 PM',
-    },
-    {
-      title: 'Afternoon',
-      description: '2.00 PM - 5.00 PM',
-    },
-    {
-      title: 'Evening',
-      description: '5.00 PM - 8.00 PM',
-    },
+    // {
+    //   title: 'Office',
+    //   description: '10.00 AM - 5.00 PM',
+    // },
   ],
   contactDetails: {
     socials: [],

@@ -26,6 +26,7 @@ const ContactGrid = ({ contact, label, count, className }: ContactProps) => {
 
   function onAddOrChange() {
     openModal('ADD_OR_UPDATE_CHECKOUT_CONTACT');
+    // ADD_OR_UPDATE_PROFILE_CONTACT
   }
   return (
     <div className={className}>

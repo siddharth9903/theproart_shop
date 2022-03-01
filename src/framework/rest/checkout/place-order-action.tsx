@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
 import {
   useCreateOrderMutation,
   useOrderStatusesQuery,
 } from '@framework/orders/orders.query';
 import { ROUTES } from '@lib/routes';
-
+import Razorpay from 'razorpay';
 import ValidationError from '@components/ui/validation-error';
 import Button from '@components/ui/button';
 import isEmpty from 'lodash/isEmpty';
@@ -18,12 +19,12 @@ import {
   calculateTotal,
 } from '@store/quick-cart/cart.utils';
 import axios from 'axios';
+import { amountAtom, currencyAtom, orderIdAtom } from '../../../pages/checkout';
 
 export const PlaceOrderAction: React.FC = (props) => {
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const { mutate: createOrder, isLoading: loading } = useCreateOrderMutation();
-  const [orderId, setOrderId] = useState('');
   const { data: orderStatusData } = useOrderStatusesQuery();
 
   const { items } = useCart();
@@ -41,21 +42,85 @@ export const PlaceOrderAction: React.FC = (props) => {
   ] = useAtom(checkoutAtom);
   const [discount] = useAtom(discountAtom);
 
-  // useEffect(async () => {
-  //   let data = {
-  //     amount: '47000',
-  //   };
-  //   await axios
-  //     .post('http://localhost:5000/api/orders/create/orderId', data)
-  //     .then((res) => {
-  //       console.log('res',res);
-  //     });
-  // }, []);
-  // }, [payment_gateway])
+  const [orderId, setOrderID] = useAtom(orderIdAtom);
+  const [amount, setAmount] = useAtom(amountAtom);
+  const [currency, setCurrency] = useAtom(currencyAtom);
 
   useEffect(() => {
     setErrorMessage(null);
   }, [payment_gateway]);
+
+  useEffect(() => {
+    console.log('total', total);
+    loadOrderId();
+  }, []);
+
+  const initializeRazorpay = () => {
+    return new Promise((resolve) => {
+      const script = document.createElement('script');
+      script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+
+      document.body.appendChild(script);
+    });
+  };
+  async function loadOrderId() {
+    let data = {
+      amount: total * 100,
+    };
+    await axios
+      .post(`${process.env.NEXT_PUBLIC_REST_API_ENDPOINT}orders/create/orderId`, data)
+      .then((res) => {
+        const { order } = res.data;
+        if (order) {
+          setOrderID(order.id);
+          setCurrency(order.currency);
+          setAmount(order.amount);
+        }
+      });
+  }
+
+  const makePayment = async () => {
+    const res = await initializeRazorpay();
+    return new Promise((resolve, reject) => {
+      if (!res) {
+        alert('Razorpay SDK Failed to load');
+        reject('razorpay failed');
+      }
+
+      var options = {
+        key: process.env.RAZORPAY_KEY, // Enter the Key ID generated from the Dashboard
+        name: 'hello',
+        currency: currency,
+        amount: amount,
+        order_id: orderId,
+        description: 'Thankyou for your trust.',
+        image: 'https://manuarora.in/logo.png',
+        handler: function (response: any) {
+          // Validate payment at server - using webhooks is a better idea.
+          resolve({
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_signature: response.razorpay_signature,
+          });
+        },
+        // prefill: {
+        //   name: "Manu Arora",
+        //   email: "manuarorawork@gmail.com",
+        //   contact: "9999999999",
+        // },
+      };
+      // const paymentObject = new window.Razorpay(options);
+      const paymentObject = new (window as any).Razorpay(options);
+      paymentObject.open();
+    });
+  };
 
   const available_items = items?.filter(
     (item) => !verified_response?.unavailable_products?.includes(item.id)
@@ -70,7 +135,7 @@ export const PlaceOrderAction: React.FC = (props) => {
     },
     Number(discount)
   );
-  const handlePlaceOrder = () => {
+  const handlePlaceOrder = async () => {
     if (!customer_contact) {
       setErrorMessage('Contact Number Is Required');
       return;
@@ -79,10 +144,10 @@ export const PlaceOrderAction: React.FC = (props) => {
       setErrorMessage('Gateway Is Required');
       return;
     }
-    if (payment_gateway === 'STRIPE' && !token) {
-      setErrorMessage('Please Pay First');
-      return;
-    }
+    // if (payment_gateway === 'RAZORPAY' && !token) {
+    //   setErrorMessage('Please Pay First');
+    //   return;
+    // }
     let input = {
       //@ts-ignore
       products: available_items?.map((item) => formatOrderedProduct(item)),
@@ -103,24 +168,53 @@ export const PlaceOrderAction: React.FC = (props) => {
       shipping_address: {
         ...(shipping_address?.address && shipping_address.address),
       },
+      paymentInfo: {},
     };
-    if (payment_gateway === 'STRIPE') {
+    if (payment_gateway === 'RAZORPAY') {
       //@ts-ignore
       input.token = token;
     }
-
-    delete input.billing_address.__typename;
-    delete input.shipping_address.__typename;
-    createOrder(input, {
-      onSuccess: (order: any) => {
-        if (order?.tracking_number) {
-          router.push(`${ROUTES.ORDERS}/${order?.tracking_number}`);
-        }
-      },
-      onError: (error: any) => {
-        setErrorMessage(error?.response?.data?.message);
-      },
-    });
+    if (payment_gateway === 'RAZORPAY') {
+      const paymentData: any = await makePayment();
+      const paymentStatus = await axios.post(
+        `${process.env.NEXT_PUBLIC_REST_API_ENDPOINT}orders/payment/verify`,
+        paymentData
+      );
+      let isPaymentSuccess = paymentStatus.data.signatureIsValid;
+      if (isPaymentSuccess) {
+        delete input.billing_address.__typename;
+        delete input.shipping_address.__typename;
+        input.paymentInfo = {
+          razorpay_payment_id: paymentData.razorpay_payment_id,
+          razorpay_order_id: paymentData.razorpay_order_id,
+        };
+        createOrder(input, {
+          onSuccess: (order: any) => {
+            if (order?.tracking_number) {
+              router.push(`${ROUTES.ORDERS}/${order?.tracking_number}`);
+            }
+          },
+          onError: (error: any) => {
+            toast.error(`Error occured`);
+            setErrorMessage(error?.response?.data?.message);
+          },
+        });
+      } else {
+        toast.error(`Payment Failed !!`);
+      }
+    } else {
+      createOrder(input, {
+        onSuccess: (order: any) => {
+          if (order?.tracking_number) {
+            router.push(`${ROUTES.ORDERS}/${order?.tracking_number}`);
+          }
+        },
+        onError: (error: any) => {
+          toast.error(`Error occured`);
+          setErrorMessage(error?.response?.data?.message);
+        },
+      });
+    }
   };
   const isAllRequiredFieldSelected = [
     customer_contact,
