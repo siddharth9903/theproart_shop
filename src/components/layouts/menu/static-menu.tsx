@@ -4,7 +4,7 @@ import { useTranslation } from 'next-i18next';
 
 const headerLinks = [
   { href: ROUTES.SHOPS, icon: null, label: 'nav-menu-shops' },
-  { href: ROUTES.OFFERS, icon: null, label: 'nav-menu-offer' },
+  // { href: ROUTES.OFFERS, icon: null, label: 'nav-menu-offer' },
   { href: ROUTES.HELP, label: 'nav-menu-faq' },
   { href: ROUTES.CONTACT, label: 'nav-menu-contact' },
 ];

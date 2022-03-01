@@ -33,7 +33,8 @@ export const ContactPage = () => {
             <span className="text-sm text-body">
               {!isEmpty(formatAddress(settings?.contactDetails?.location))
                 ? formatAddress(settings?.contactDetails?.location)
-                : t('common:text-no-address')}
+                : t('Ahmedabad, Gujarat, India ')}
+              {/* : t('common:text-no-address')} */}
             </span>
           </div>
 
@@ -45,6 +46,7 @@ export const ContactPage = () => {
               {settings?.contactDetails?.contact
                 ? settings?.contactDetails?.contact
                 : t('text-no-contact')}
+              {/* // : t  ('+91 9909166848')} */}
             </span>
           </div>
           {settings?.contactDetails?.website && (
@@ -73,6 +75,13 @@ export const ContactPage = () => {
               {t('text-follow-us')}
             </span>
             <div className="flex items-center justify-start">
+            {/* <ul className="social-icon">
+							<li><a href="#" className="fa fa-facebook"></a></li>
+							<li><a href="https://twitter.com/Siddharth9903?t=38GOXTBTyTQ6y3hl54ViIA&s=08" className="fa fa-twitter"></a></li>
+							<li><a href="https://github.com/siddharth9903" className="fa fa-github"></a></li>
+							<li><a href="https://www.instagram.com/siddharth_patel_009/" className="fa fa-instagram"></a>
+							</li>
+						</ul> */}
               {settings?.contactDetails?.socials?.map(
                 (item: any, index: number) => (
                   <a

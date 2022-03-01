@@ -15,6 +15,7 @@ import type { NextPage } from 'next';
 import { Provider as NextAuthProvider } from 'next-auth/client';
 import Search from '@components/ui/search/search';
 import { SearchProvider } from '@components/ui/search/search.context';
+import { NextScript } from 'next/document';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: React.ReactElement) => React.ReactNode;

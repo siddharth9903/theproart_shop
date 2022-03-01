@@ -17,12 +17,13 @@ import {
   calculatePaidTotal,
   calculateTotal,
 } from '@store/quick-cart/cart.utils';
+import axios from 'axios';
 
 export const PlaceOrderAction: React.FC = (props) => {
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const { mutate: createOrder, isLoading: loading } = useCreateOrderMutation();
-
+  const [orderId, setOrderId] = useState('');
   const { data: orderStatusData } = useOrderStatusesQuery();
 
   const { items } = useCart();
@@ -39,6 +40,18 @@ export const PlaceOrderAction: React.FC = (props) => {
     },
   ] = useAtom(checkoutAtom);
   const [discount] = useAtom(discountAtom);
+
+  // useEffect(async () => {
+  //   let data = {
+  //     amount: '47000',
+  //   };
+  //   await axios
+  //     .post('http://localhost:5000/api/orders/create/orderId', data)
+  //     .then((res) => {
+  //       console.log('res',res);
+  //     });
+  // }, []);
+  // }, [payment_gateway])
 
   useEffect(() => {
     setErrorMessage(null);

@@ -3,7 +3,7 @@ import logoPlaceholder from '@assets/placeholders/logo.svg';
 const siteSettings = {
   name: 'TheProArt E-commerce Shop',
   description: '',
-  currencyCode: 'USD',
+  currencyCode: 'INR',
   logo: logoPlaceholder,
 };
 

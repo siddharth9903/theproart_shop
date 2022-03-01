@@ -8,6 +8,7 @@ export const Contact = () => {
     mutate(values);
     // reset();
   }
+  // return <ContactForm onSubmit={onSubmit} loading={isLoading} />;
   return <ContactForm onSubmit={onSubmit} loading={isLoading} />;
 };
 export default Contact;

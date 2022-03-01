@@ -18,12 +18,15 @@ import ItemCard from '@components/checkout/item/item-card';
 import { ItemInfoRow } from '@components/checkout/item/item-info-row';
 import PaymentGrid from '@components/checkout/payment/payment-grid';
 import { PlaceOrderAction } from '@framework/checkout/place-order-action';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 interface Props {
   className?: string;
 }
 const VerifiedItemList: React.FC<Props> = ({ className }) => {
   const { t } = useTranslation('common');
+const [orderId, setOrderId] = useState('')
   const { items, isEmpty: isEmptyCart } = useCart();
   const [verifiedResponse] = useAtom(verifiedResponseAtom);
   const [coupon, setCoupon] = useAtom(couponAtom);

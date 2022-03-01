@@ -4,6 +4,8 @@ import dynamic from 'next/dynamic';
 import { getLayout } from '@components/layouts/layout';
 import useUser from '@framework/auth/use-user';
 import { AddressType } from '@framework/utils/constants';
+import { useEffect } from 'react';
+import axios from 'axios';
 export { getStaticProps } from '@framework/ssr/common';
 
 const ScheduleGrid = dynamic(
