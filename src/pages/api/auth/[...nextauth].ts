@@ -6,10 +6,6 @@ import Providers from 'next-auth/providers';
 export default NextAuth({
   // https://next-auth.js.org/configuration/providers
   providers: [
-    Providers.Facebook({
-      clientId: process.env.FACEBOOK_CLIENT_ID,
-      clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-    }),
     Providers.Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -43,7 +39,7 @@ export default NextAuth({
     // A secret to use for key generation (you should set this explicitly)
     // secret: 'INp8IvdIyeMcoGAgFGoA61DdBglwwSqnXJZkgz8PSnw',
     // Set to true to use encryption (default: false)
-    // encryption: true,
+    //encryption: true,
     // You can define your own encode/decode functions for signing and encryption
     // if you want to override the default behaviour.
     // encode: async ({ secret, token, maxAge }) => {},

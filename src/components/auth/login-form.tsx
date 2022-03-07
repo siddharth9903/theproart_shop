@@ -11,6 +11,7 @@ import { useModalAction } from '@components/ui/modal/modal.context';
 import { MobileIcon } from '@components/icons/mobile-icon';
 import { Form } from '@components/ui/forms/form';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 interface LoginFormProps {
   errorMessage: string;
@@ -29,6 +30,7 @@ const loginFormSchema = yup.object().shape({
     .required('error-email-required'),
   password: yup.string().required('error-password-required'),
 });
+
 const LoginForm: React.FC<LoginFormProps> = ({
   onSubmit,
   loading,
@@ -37,7 +39,61 @@ const LoginForm: React.FC<LoginFormProps> = ({
   const { t } = useTranslation('common');
   const { openModal } = useModalAction();
   const [errorMsg, setErrorMsg] = useState('');
-  
+
+  // const loginWithGoogle = async () => {
+  //   await axios.get('http://localhost:5000/api/google');
+  // };
+
+  // const fetchAuthUser = async () => {
+  //   // const proxyurl = 'https://cors-anywhere.herokuapp.com/';
+  //   // const url =
+  //   //   'http://localhost:5000/api/google/login'; // site that doesn’t send Access-Control-*
+  //   // fetch(proxyurl + url).then((resp) => resp.json())
+  //   // .catch((err) => {
+  //   //   console.log('error', err);
+  //   //   console.log('Not properly authenticated');
+  //   //   // dispatch(setIsAuthenticated(false));
+  //   //   // dispatch(setAuthUser(null));
+  //   //   // history.push("/login/error");
+  //   // });
+  //   const response = await axios
+  //     .get('http://localhost:5000/api/google/login')
+  //     .catch((err) => {
+  //       console.log('error', err);
+  //       console.log('Not properly authenticated');
+  //       // dispatch(setIsAuthenticated(false));
+  //       // dispatch(setAuthUser(null));
+  //       // history.push("/login/error");
+  //     });
+
+  //   if (response && response.data) {
+  //     console.log('User: ', response.data);
+  //     // dispatch(setIsAuthenticated(true));
+  //     // dispatch(setAuthUser(response.data));
+  //     // history.push("/welcome");
+  //   }
+  // };
+
+  // const redirectToGoogleSSO = async () => {
+  //   let timer: NodeJS.Timeout | null = null;
+  //   const googleLoginURL = 'http://localhost:5000/api/google';
+  //   const newWindow = window.open(
+  //     googleLoginURL,
+  //     '_blank',
+  //     'width=500,height=600'
+  //   );
+
+  //   if (newWindow) {
+  //     timer = setInterval(() => {
+  //       if (newWindow.closed) {
+  //         console.log("Yay we're authenticated");
+  //         fetchAuthUser();
+  //         if (timer) clearInterval(timer);
+  //       }
+  //     }, 500);
+  //   }
+  // };
+
   return (
     <div className="py-6 px-5 sm:p-8 bg-light w-screen md:max-w-[480px] min-h-screen md:min-h-0 h-full md:h-auto flex flex-col justify-center md:rounded-xl">
       <div className="flex justify-center">
@@ -88,18 +144,20 @@ const LoginForm: React.FC<LoginFormProps> = ({
       </Form>
       {/* End of forgot login form */}
 
-      <div className="flex flex-col items-center justify-center relative text-sm text-heading mt-8 sm:mt-11 mb-6 sm:mb-8">
+      {/* <div className="flex flex-col items-center justify-center relative text-sm text-heading mt-8 sm:mt-11 mb-6 sm:mb-8">
         <hr className="w-full" />
         <span className="absolute start-2/4 -top-2.5 px-2 -ms-4 bg-light">
           {t('text-or')}
         </span>
-      </div>
+      </div> */}
 
-      <div className="grid grid-cols-1 gap-4 mt-2">
+      {/* <div className="grid grid-cols-1 gap-4 mt-2">
         <Button
           className="!bg-social-google hover:!bg-social-google-hover !text-light"
           disabled={loading}
           onClick={() => {
+            // redirectToGoogleSSO();
+            // loginWithGoogle();
             signIn('google');
           }}
         >
@@ -115,7 +173,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
           <MobileIcon className="h-5 me-2 text-light" />
           {t('text-login-mobile')}
         </Button>
-      </div>
+      </div> */}
 
       <div className="flex flex-col items-center justify-center relative text-sm text-heading mt-8 sm:mt-11 mb-6 sm:mb-8">
         <hr className="w-full" />

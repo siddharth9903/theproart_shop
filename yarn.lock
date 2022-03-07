@@ -1273,6 +1273,7 @@
     "tslib" "~2.3.0"
 
 "@graphql-codegen/typescript-resolvers@*":
+  "integrity" "sha512-KdCVfg2u2RMbHu7eV9SOh5rmfnEQaMsQ0k8741bMbBmCESLnrWltujF2RT1OPN7WCn7xJejBtrFg/3UgT0fNug=="
   "version" "1.19.1"
   dependencies:
     "@graphql-codegen/plugin-helpers" "^1.18.5"
@@ -2590,6 +2591,7 @@
   "version" "2.2.0"
 
 "babel-jest@*":
+  "integrity" "sha512-6NrdqzaYemALGCuR97QkC/FkFIEBWP5pw5TMJoUHZTVXyOgocujp6A0JE2V6gE0HtqAAv6VKU/nI+OCR1Z4gHA=="
   "version" "27.1.0"
   dependencies:
     "@jest/transform" "^27.1.0"
@@ -7412,6 +7414,13 @@
   dependencies:
     "attr-accept" "^2.2.1"
     "file-selector" "^0.2.2"
+    "prop-types" "^15.7.2"
+
+"react-google-button@^0.7.2":
+  "integrity" "sha512-LPIqU2hIlc212kqks8MtKjRstquVkP3SIjxlK5B1nIfg2R7YqSusJAxZUkJA5dv/z6QeSuGyI9ujwV/VWMTyAA=="
+  "resolved" "https://registry.npmjs.org/react-google-button/-/react-google-button-0.7.2.tgz"
+  "version" "0.7.2"
+  dependencies:
     "prop-types" "^15.7.2"
 
 "react-hook-form@^7.0.0", "react-hook-form@^7.15.3":
