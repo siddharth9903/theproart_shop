@@ -4,6 +4,10 @@ export const faq = [
     content: 'faq-one-content',
   },
   {
+    title: 'faq-five-title',
+    content: 'faq-five-content',
+  },
+  {
     title: 'faq-two-title',
     content: 'faq-two-content',
   },
@@ -14,5 +18,5 @@ export const faq = [
   {
     title: 'faq-four-title',
     content: 'faq-four-content',
-  },
+  }
 ];

@@ -39,22 +39,23 @@ const BannerWithSearch: React.FC<BannerProps> = ({ banners, layout }) => {
             {banners?.map((banner, idx) => (
               <SwiperSlide key={idx}>
                 <div
-                  className={cn('relative w-full h-screen', {
+                  className={cn('relative w-full h-screen ', {
                     'max-h-140': layout === 'standard',
                   })}
                 >
-                  <Image
-                    className="w-full h-full min-h-140"
+                  <img
+                    className="w-full min-h-140 object-cover"
                     src={banner.image?.original ?? productPlaceholder}
                     alt={banner.title ?? ''}
-                    layout="fill"
-                    objectFit="cover"
+                    // layout="fill"
+                    // objectFit="cover"
                   />
-                  <div className="p-5 md:px-20 mt-8 absolute inset-0 w-full flex flex-col items-center justify-center text-center space-y-10">
-                    <h1 className="text-4xl xl:text-5xl tracking-tight text-heading font-bold">
+                  {/* <div className="p-5 md:px-20 mt-8 absolute inset-0 w-full flex flex-col items-center justify-center text-center space-y-10"> */}
+                  <div className="p-5 md:px-20 mt-8 inset-0 w-full flex flex-col items-center justify-center text-center space-y-10">
+                    <h1 className="text-4xl xl:text-5xl tracking-tight text-heading font-bold text-white">
                       {banner?.title}
                     </h1>
-                    <p className="text-base xl:text-lg text-heading">
+                    <p className="text-base xl:text-lg text-heading text-white">
                       {banner?.description}
                     </p>
                     <div className="max-w-3xl w-full">

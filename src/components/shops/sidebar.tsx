@@ -40,7 +40,7 @@ const ShopSidebar: React.FC<ShopSidebarProps> = ({
             alt={t('logo')}
             src={data?.shop?.logo?.original! ?? productPlaceholder}
             layout="fill"
-            objectFit="cover"
+            objectFit="contain"
           />
         </div>
 
@@ -72,7 +72,8 @@ const ShopSidebar: React.FC<ShopSidebarProps> = ({
                   alt={t('logo')}
                   src={data?.shop?.logo?.original! ?? productPlaceholder}
                   layout="fill"
-                  objectFit="cover"
+                  objectFit="contain"
+                  className="w-full h-full"
                 />
               </div>
 

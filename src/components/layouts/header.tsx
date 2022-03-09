@@ -27,12 +27,12 @@ const Header = () => {
   const [isAuthorize] = useAtom(authorizationAtom);
   const isHomePage = useIsHomePage();
   useEffect(() => {
-    if (!isHomePage) {
-      setDisplayHeaderSearch(false);
+    if (true) {
+      setDisplayHeaderSearch(true);
     }
   }, [isHomePage, setDisplayHeaderSearch]);
-  const isFlattenHeader =
-    !displayHeaderSearch && isHomePage && layout !== 'modern';
+  const isFlattenHeader =false
+    // !displayHeaderSearch && isHomePage && layout !== 'modern';
   return (
     <header
       className={cn('site-header-with-search h-14 md:h-16 lg:h-22', {
@@ -55,9 +55,11 @@ const Header = () => {
             <GroupsDropdownMenu />
           </div>
         </div>
+        {/* {isHomePage ? ( */}
         {isHomePage ? (
           <>
-            {(displayHeaderSearch || layout === 'modern') && (
+            {/* {(displayHeaderSearch || layout === 'modern') && ( */}
+            {(true || layout === 'modern') && (
               <div className="hidden lg:block w-full xl:w-11/12 2xl:w-10/12 mx-auto px-10 overflow-hidden">
                 <Search label={t('text-search-label')} variant="minimal" />
               </div>
