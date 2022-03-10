@@ -54,8 +54,6 @@ export const OrderItems = ({ orderProductPivot }: any) => {
   const { alignLeft, alignRight } = useIsRTL();
   const { data: orderStatusData } = useOrderStatusesQuery();
   const whole = useOrderStatusesQuery();
-  console.log('whole',whole);
-  console.log('orderStatusData', orderStatusData);
   const orderTableColumns = useMemo(
     () => {
       return ([

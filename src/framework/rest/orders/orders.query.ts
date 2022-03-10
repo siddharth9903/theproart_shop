@@ -24,17 +24,12 @@ const fetchOrders = async ({
 }: QueryParamsType): Promise<PaginatedOrder> => {
   const params = queryKey[1];
   let fetchedData: any = {};
-  console.log('queryKey', queryKey);
-  console.log('pageParam', pageParam);
-  console.log('params', params);
   if (pageParam) {
     // const response = await OrderService.fetchUrl(pageParam);
     const response = await CustomerOrderService.fetchUrl(pageParam);
-    console.log('returned responsed data', response);
     fetchedData = response.data;
   } else {
     const response = await CustomerOrderService.find(params as ParamsType);
-    console.log('returned responsed data', response);
     fetchedData = response.data;
   }
   const { data, ...rest } = fetchedData;

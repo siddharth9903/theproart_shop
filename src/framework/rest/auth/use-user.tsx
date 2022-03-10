@@ -19,7 +19,7 @@ const useUser = () => {
   const { data, isLoading, error } = useCustomerQuery({
     enabled: isAuthorized,
     onError: (err) => {
-      console.log(err);
+      
     },
   });
   return { me: data?.me, loading: isLoading, error };

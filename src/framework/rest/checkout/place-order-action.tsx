@@ -51,7 +51,6 @@ export const PlaceOrderAction: React.FC = (props) => {
   }, [payment_gateway]);
 
   useEffect(() => {
-    console.log('total', total);
     loadOrderId();
   }, []);
 

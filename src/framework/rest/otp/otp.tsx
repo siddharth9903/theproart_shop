@@ -34,15 +34,11 @@ export const OTP: React.FC<OTPProps> = ({ defaultValue, onVerify }) => {
       },
       {
         onSuccess: (data) => {
-          console.log('data',data);
           if (data?.success) {
-            console.log('success run')
             setHasOTP(true);
             setOtpId(data?.sendOtpCode?.id!);
           }
           if (!data?.success) {
-            console.log('failed run')
-            console.log('text-otp-failed');
             setErrorMessage(data?.message);
           }
         },
@@ -72,7 +68,6 @@ export const OTP: React.FC<OTPProps> = ({ defaultValue, onVerify }) => {
           setHasOTP(false);
         },
         onError: (error: any) => {
-          console.log(error?.response?.data?.message)
           setErrorMessage(error?.response?.data?.message);
         },
       }

@@ -23,7 +23,6 @@ export default function OrderView({ order }: any) {
     resetCart();
     resetCheckout();
   }, [resetCart, resetCheckout]);
-  console.log('order-view', order);
   const { price: total } = usePrice({ amount: order?.paid_total! });
   const { price: sub_total } = usePrice({ amount: order?.amount! });
   const { price: shipping_charge } = usePrice({

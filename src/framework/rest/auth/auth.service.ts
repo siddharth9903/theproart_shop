@@ -66,7 +66,6 @@ class Auth extends CoreApi {
     return await this.http
       .post(API_ENDPOINTS.SEND_OTP_CODE, input)
       .then((res) => {
-        console.log('response',res);
         return res.data
       });
   }
