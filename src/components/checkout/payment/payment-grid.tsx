@@ -8,6 +8,7 @@ import { useAtom } from 'jotai';
 import { paymentGatewayAtom, PaymentMethodName } from '@store/checkout';
 import cn from 'classnames';
 
+
 interface PaymentMethodInformation {
   name: string;
   value: PaymentMethodName;
@@ -33,7 +34,7 @@ const AVAILABLE_PAYMENT_METHODS_MAP: Record<
   RAZORPAY: {
     name: 'Razorpay',
     value: 'RAZORPAY',
-    icon: '/payment/stripe.png',
+    icon: '/payment/razorpay',
     component: razorPayStart,
   },
   CASH_ON_DELIVERY: {
@@ -86,7 +87,7 @@ const PaymentGrid: React.FC<{ className?: string}> = ({
                       <>
                         {/* eslint-disable */}
                         {/* <img src={icon} alt={name} className="h-[30px]" /> */}
-                        <img src="{icon}" alt={name} className="h-[30px]" />
+                        <img src={'https://upload.wikimedia.org/wikipedia/en/8/89/Razorpay_logo.svg'} alt={name} className="h-[30px]" />
                       </>
                     ) : (
                       <span className="text-xs text-heading font-semibold">

@@ -35,7 +35,7 @@ const BannerShort: React.FC<BannerProps> = ({ banners }) => {
               <SwiperSlide key={idx}>
                 <div className="relative w-full h-full max-h-[240px] md:max-h-[450px]">
                   <Image
-                    className="w-full h-full"
+                    className="w-full h-full object-contain"
                     src={banner.image?.original ?? productPlaceholder}
                     alt={banner.title ?? ''}
                     layout="responsive"

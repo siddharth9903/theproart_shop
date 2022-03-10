@@ -119,6 +119,7 @@ const Details: React.FC<Props> = ({
                   alt={name}
                   width={450}
                   height={450}
+                  className="object-contain"
                 />
               </div>
             )}

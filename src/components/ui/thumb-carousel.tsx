@@ -62,6 +62,7 @@ export const ThumbsCarousel: React.FC<Props> = ({ gallery }) => {
                 alt={`Product gallery ${item.id}`}
                 width={450}
                 height={450}
+                className="object-contain"
               />
             </SwiperSlide>
           ))}
@@ -110,6 +111,7 @@ export const ThumbsCarousel: React.FC<Props> = ({ gallery }) => {
                 alt={`Product thumb gallery ${item.id}`}
                 width={80}
                 height={80}
+                className="object-contain"
               />
             </SwiperSlide>
           ))}
