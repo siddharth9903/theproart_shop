@@ -95,8 +95,8 @@ export const PlaceOrderAction: React.FC = (props) => {
 
       var options = {
         key: process.env.RAZORPAY_KEY, // Enter the Key ID generated from the Dashboard
-        name: 'hello',
-        currency: currency,
+        name: 'prod',
+        currency: 'INR',
         amount: amount,
         order_id: orderId,
         description: 'Thankyou for your trust.',
