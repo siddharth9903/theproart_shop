@@ -176,7 +176,7 @@ export const PlaceOrderAction: React.FC = (props) => {
     if (payment_gateway === 'RAZORPAY') {
       const paymentData: any = await makePayment();
       const paymentStatus = await axios.post(
-        `${process.env.NEXT_PUBLIC_REST_API_ENDPOINT}orders/payment/verify`,
+        `${process.env.NEXT_PUBLIC_REST_API_ENDPOINT}/orders/payment/verify`,
         paymentData
       );
       let isPaymentSuccess = paymentStatus.data.signatureIsValid;
