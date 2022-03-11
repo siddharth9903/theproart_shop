@@ -74,7 +74,7 @@ export const PlaceOrderAction: React.FC = (props) => {
       amount: total * 100,
     };
     await axios
-      .post(`${process.env.NEXT_PUBLIC_REST_API_ENDPOINT}orders/create/orderId`, data)
+      .post(`${process.env.NEXT_PUBLIC_REST_API_ENDPOINT}/orders/create/orderId`, data)
       .then((res) => {
         const { order } = res.data;
         if (order) {
