@@ -67,3 +67,15 @@ export const useProductQuery = (slug: string) => {
     fetchProduct(slug)
   );
 };
+
+export const fetchProductById = async (id: string) => {
+  let url = `${API_ENDPOINTS.PRODUCTS}/id/${id}`;
+  const { data } = await ProductService.fetchUrl(url);
+  return data;
+};
+
+export const useProductByIdQuery = (id: string) => {
+  return useQuery<Product, Error>([`${API_ENDPOINTS.PRODUCTS}/id`, id], () =>
+    fetchProductById(id)
+  );
+};

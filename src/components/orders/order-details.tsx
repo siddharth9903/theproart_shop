@@ -21,7 +21,7 @@ const OrderDetails = ({ order }: Props) => {
     shipping_address,
     billing_address,
     tracking_number,
-    orderProductPivot
+    orderProductPivot,
   } = order ?? {};
 
   const { price: amount } = usePrice({
@@ -39,7 +39,7 @@ const OrderDetails = ({ order }: Props) => {
   const { price: sales_tax } = usePrice({
     amount: order?.sales_tax,
   });
-
+  console.log('order', order);
   return (
     <div className="flex flex-col w-full lg:w-2/3 border border-border-200">
       {!isEmpty(order) ? (
@@ -118,7 +118,7 @@ const OrderDetails = ({ order }: Props) => {
             <div className="w-full flex justify-center items-center px-6">
               <OrderStatus status={status?.serial} />
             </div>
-            <OrderItems orderProductPivot={orderProductPivot} />
+            {/* <OrderItems orderProductPivot={orderProductPivot} /> */}
           </div>
         </>
       ) : (
