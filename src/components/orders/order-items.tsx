@@ -11,18 +11,11 @@ import { useProductByIdQuery, useProductQuery } from '../../framework/rest/produ
 
 const OrderItemList = (_: any, record: any) => {
 
-  // let name = record.name;
-  if (!record) {
-    return <></>;
-  } else {
     const { product_id } = record;
-    console.log('product_id',product_id)
     const { data, isLoading: loading } = useProductByIdQuery(product_id);
-    console.log('dataaaaaaaaaaa', data);
     const { price } = usePrice({
       amount: record.unit_price,
     });
-    console.log('record', record);
     let name = data?.name;
     // if (record?.pivot?.variation_option_id) {
     //   const variationTitle = record?.variation_options?.find(
@@ -58,7 +51,7 @@ const OrderItemList = (_: any, record: any) => {
         </div>
       </>
     );
-  }
+  
 };
 
 export const OrderItems = ({ orderProductPivot }: any) => {
