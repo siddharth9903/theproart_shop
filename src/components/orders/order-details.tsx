@@ -115,9 +115,9 @@ const OrderDetails = ({ order }: Props) => {
 
           {/* Order Table */}
           <div>
-            <div className="w-full flex justify-center items-center px-6">
+            {/* <div className="w-full flex justify-center items-center px-6">
               <OrderStatus status={status?.serial} />
-            </div>
+            </div> */}
             {/* <OrderItems orderProductPivot={orderProductPivot} /> */}
           </div>
         </>
