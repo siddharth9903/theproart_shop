@@ -74,6 +74,16 @@ export const ContactPage = () => {
             <span className="font-semibold text-heading mb-4">
               {t('text-follow-us')}
             </span>
+            <div>
+              <img src="/theproart-by-sid.png"  alt="" />
+            </div>
+            <br />
+            <span className="font-semibold text-heading mb-4">
+              {"About founders"}
+            </span>
+            <span>
+              Theproart is Co-founded by <b>Siddharth Patel</b> and <b>Mehul Kalathiya</b>.
+            </span>
             <div className="flex items-center justify-start">
             {/* <ul className="social-icon">
 							<li><a href="#" className="fa fa-facebook"></a></li>
@@ -82,6 +92,7 @@ export const ContactPage = () => {
 							<li><a href="https://www.instagram.com/siddharth_patel_009/" className="fa fa-instagram"></a>
 							</li>
 						</ul> */}
+            
               {settings?.contactDetails?.socials?.map(
                 (item: any, index: number) => (
                   <a
