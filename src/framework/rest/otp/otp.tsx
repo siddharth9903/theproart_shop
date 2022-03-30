@@ -34,11 +34,10 @@ export const OTP: React.FC<OTPProps> = ({ defaultValue, onVerify }) => {
       },
       {
         onSuccess: (data) => {
-          if (data?.success) {
+          if (data?.type == 'success') {
             setHasOTP(true);
             setOtpId(data?.sendOtpCode?.id!);
-          }
-          if (!data?.success) {
+          } else {
             setErrorMessage(data?.message);
           }
         },
@@ -50,7 +49,6 @@ export const OTP: React.FC<OTPProps> = ({ defaultValue, onVerify }) => {
   }
 
   function onVerifyCodeSubmission() {
-    
     verifyOtpCode(
       {
         phone_number: number,
@@ -59,13 +57,14 @@ export const OTP: React.FC<OTPProps> = ({ defaultValue, onVerify }) => {
       },
       {
         onSuccess: (data) => {
-          if (data?.success) {
+          if (data?.type == 'success') {
             onVerify(number);
           } else {
             setErrorMessage(data?.message);
           }
-          if(data?.message!='Incorrect otp')
-          setHasOTP(false);
+          if (data?.statusCode == 400) {
+            setErrorMessage(data?.message);
+          }
         },
         onError: (error: any) => {
           setErrorMessage(error?.response?.data?.message);
